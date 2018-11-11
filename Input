@@ -1,0 +1,36 @@
+/**
+ * 
+ */
+package prj5;
+
+/**
+ * @author Brooke Fey
+ * @version 2018.11.11
+ */
+public class Input {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        String musicSurvey = args[0];
+        String songList = args[1];
+        System.out.println(musicSurvey);
+        System.out.println(songList);
+    }
+
+    public void representHobbies()
+    {
+        //Insert what Andrew did?
+    }
+    
+    public void sortByGenre()
+    {
+        
+    }
+    
+    public void sortBySongTitle()
+    {
+        
+    }
+}
