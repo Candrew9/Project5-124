@@ -1,0 +1,30 @@
+/**
+ * 
+ */
+package prj5;
+
+import CS2114.Button;
+import CS2114.Shape;
+import CS2114.TextShape;
+import CS2114.Window;
+
+/**
+ * @author Brooke Fey
+ * @version 2018.11.11
+ */
+public class DisplayWindow {
+
+    private Window window;
+    private Button sortByArtistNameButton;
+    private Button sortBySongTitleButton;
+    private Button sortByReleaseyearButton;
+    private Button sortByGenreButton;
+    private Button representHobbyButton;
+    private Button representMajorButton;
+    private Button representRegionButton;
+    private Button quitButton;
+    private Button previousButton;
+    private Button nextButton;
+    private TextShape legendText;
+    private Shape barShape;
+}
