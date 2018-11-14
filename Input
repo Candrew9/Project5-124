@@ -16,41 +16,41 @@ import java.util.Scanner;
  */
 public class Input {
 
+    private static Scanner scanSurvey;
+    private static Scanner scanSong;
+    private static DLList<String[]> survey;
+
+
     /**
      * @param args
      */
-    public static void main(String[] args) throws IOException {
-        String musicSurvey = args[0];
-        String songList = args[1];
+    public static void main(String[] args) {
         FileReader fileSurvey = null;
         FileReader fileSongList = null;
+        // Scanner scanSurvey = null;
+        // Scanner scanSong = null;
+        survey = new DLList<String[]>();
         try {
             fileSurvey = new FileReader(args[0]);
             fileSongList = new FileReader(args[1]);
-            Scanner scanSurvey = new Scanner(fileSurvey);
-            Scanner scanSong = new Scanner(fileSongList);
-            while (scanSurvey.hasNextLine())
-            {
+            scanSurvey = new Scanner(fileSurvey);
+            scanSong = new Scanner(fileSongList);
+            while (scanSurvey.hasNextLine()) {
                 String[] separator = scanSurvey.nextLine().split(",");
+                survey.add(separator);
                 System.out.println(Arrays.toString(separator));
             }
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        scanSurvey.close();
+        scanSong.close();
+        System.out.println(result);
+    }
 
-    public void representHobbies()
-    {
-        //Insert what Andrew did?
-    }
-    
-    public void sortByGenre()
-    {
-        
-    }
-    
-    public void sortBySongTitle()
-    {
-        
+
+    public void representHobbies() {
+        // Insert what Andrew did?
     }
 }
