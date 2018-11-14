@@ -6,6 +6,9 @@ package prj5;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * @author Brooke Fey
@@ -16,26 +19,25 @@ public class Input {
     /**
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String musicSurvey = args[0];
         String songList = args[1];
+        FileReader fileSurvey = null;
+        FileReader fileSongList = null;
         try {
-            FileReader fileSurvey = new FileReader(args[0]);
+            fileSurvey = new FileReader(args[0]);
+            fileSongList = new FileReader(args[1]);
+            Scanner scanSurvey = new Scanner(fileSurvey);
+            Scanner scanSong = new Scanner(fileSongList);
+            while (scanSurvey.hasNextLine())
+            {
+                String[] separator = scanSurvey.nextLine().split(",");
+                System.out.println(Arrays.toString(separator));
+            }
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        try {
-            FileReader fileSongList = new FileReader(args[1]);
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        BufferedReader reader = null;
-        String line = "";
-        System.out.println(musicSurvey);
-        System.out.println(songList);
-    }
 
     public void representHobbies()
     {
