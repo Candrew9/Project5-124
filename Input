@@ -3,6 +3,10 @@
  */
 package prj5;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 /**
  * @author Brooke Fey
  * @version 2018.11.11
@@ -15,6 +19,20 @@ public class Input {
     public static void main(String[] args) {
         String musicSurvey = args[0];
         String songList = args[1];
+        try {
+            FileReader fileSurvey = new FileReader(args[0]);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            FileReader fileSongList = new FileReader(args[1]);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        BufferedReader reader = null;
+        String line = "";
         System.out.println(musicSurvey);
         System.out.println(songList);
     }
