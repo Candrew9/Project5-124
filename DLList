@@ -330,9 +330,36 @@ public class DLList<E> {
         return builder.toString();
     }
     
-    public void sort()
+    public int[][] getOdds(int[][] answers)
     {
-        //sort
+        int[][] odds = null;
+        int k = 0;
+        for (int i = 0; i < answers[i].length; i++)
+        {
+            for (int j = 5; j < answers[j].length; j++)
+            {
+                odds[i][k] = answers[i][j];
+                k++;
+                j++;
+            }
+        }
+        return odds;
+    }
+    
+    public int[][] getEvens(int[][] answers)
+    {
+        int[][] evens = null;
+        int k = 0;
+        for (int i = 0; i < answers[i].length; i++)
+        {
+            for (int j = 6; j < answers[j].length; j++)
+            {
+                evens[i][k] = answers[i][j];
+                k++;
+                j++;
+            }
+        }
+        return evens;
     }
 
 
