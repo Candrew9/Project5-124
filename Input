@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -19,8 +20,9 @@ public class Input {
 
     private static Scanner scanSurvey;
     private static Scanner scanSong;
-    private static DLList<String[]> survey;
-    private static ArrayList<String[]> songList;
+    // private static DLList<String[]> survey;
+    private static String[][] surveyData;
+    private static String[][] songList;
 
 
     /**
@@ -29,79 +31,74 @@ public class Input {
     public static void main(String[] args) {
         FileReader fileSurvey = null;
         FileReader fileSongList = null;
+        BufferedReader bufferSurvey = null;
+        BufferedReader bufferSongList = null;
         String result = "";
-        survey = new DLList<String[]>();
-        songList = new ArrayList<String[]>();
+        // survey = new DLList<String[]>();
+        // songList = new ArrayList<String[]>();
+        List<String[]> surveyRows = new ArrayList<String[]>();
+        List<String[]> songRows = new ArrayList<String[]>();
         try {
+            // Sets up scanners
             fileSurvey = new FileReader(args[0]);
             fileSongList = new FileReader(args[1]);
-            scanSurvey = new Scanner(fileSurvey);
-            scanSong = new Scanner(fileSongList);
-            scanSurvey.nextLine(); // Skips headers
+            bufferSurvey = new BufferedReader(fileSurvey);
+            bufferSongList = new BufferedReader(fileSongList);
+            scanSurvey = new Scanner(bufferSurvey);
+            scanSong = new Scanner(bufferSongList);
+            // Puts csv lines in a column
             while (scanSurvey.hasNextLine()) {
-                String[] separator = scanSurvey.nextLine().split(",");
-                survey.add(separator);
+                String line = scanSurvey.nextLine();
+                String[] separator = line.split(",");
+                // survey.add(separator);
+                surveyRows.add(separator);
+                // System.out.println(separator);
                 // System.out.println(Arrays.toString(separator));
             }
             while (scanSong.hasNextLine()) {
                 String[] songs = scanSong.nextLine().split(",");
-                songList.add(songs);
+                // songList.add(songs);
+                songRows.add(songs);
             }
+            surveyData = new String[surveyRows.size()][0];
+            surveyData = surveyRows.toArray(surveyData);
+            songList = new String[songRows.size()][0];
+            songList = songRows.toArray(songList);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         scanSurvey.close();
         scanSong.close();
-        //System.out.println(outputToString());
-         System.out.println(songList.get(1)[0]);
+        System.out.println(outputToString());
+        // System.out.println(songList[][0]);
+        // System.out.println(surveyData[5][5]);
+        // System.out.println(songList.length);
     }
 
 
     public static String outputToString() {
         String outputHolder = "";
-        for (int i = 0; i < songList.size() - 1; i++) {
-            outputHolder += songList.get(0)[0] + " " + songList.get(i + 1)[0]
-                + "\n"; // Song title
-            outputHolder += "song " + songList.get(0)[1] + " " + songList.get(i
-                + 1)[1] + "\n"; // Song Artist
-            outputHolder += "song " + songList.get(0)[3] + " " + songList.get(i
-                + 1)[3] + "\n"; // Song year, different order between csv and test
-            outputHolder += "song " + songList.get(0)[2] + " " + songList.get(i
-                + 1)[2] + "\n"; // Song genre
-            outputHolder += "heard" + "\n" + "Heard percentage" + " " + songList.get(i
-                + 1)[2] + "\n"; // heard
-            outputHolder += "likes" + "\n" + "Like percentage" + " " + songList.get(i
-                + 1)[2] + "\n"; // likes
+        for (int i = 1; i < songList.length; i++) {
+            outputHolder += songList[0][0] + " " + songList[i][0] + "\n"; // Song
+                                                                          // title
+            outputHolder += "song " + songList[0][1] + " " + songList[i][1]
+                + "\n"; // Song Artist
+            outputHolder += "song " + songList[0][3] + " " + songList[i][3]
+                + "\n"; // Song year, different order between csv and
+            // test
+            outputHolder += "song " + songList[0][2] + " " + songList[i][2]
+                + "\n"; // Song genre
+            outputHolder += "heard" + "\n"; // heard header
+            CombinationCalculator combo = new CombinationCalculator(surveyData,
+                i, "Hobby");
+            outputHolder += combo.heardPercentToString() + "\n"; // heard
+                                                                 // percentages
+            outputHolder += "likes" + "\n"; // likes header
+            outputHolder += combo.likePercentToString() + "\n"; // likes
+                                                                // percentages
+            outputHolder += "\n";
         }
         return outputHolder;
-    }
-
-
-    public Integer[] percentCounter(int index) {
-        ArrayList<Integer> percentages = new ArrayList<Integer>();
-        for (int i = 0; i < survey.size(); i++) {
-            String[] answers = survey.get(i);
-            if (answers[4].equalsIgnoreCase("reading")) {
-
-            }
-            else if (answers[4].equalsIgnoreCase("art")) {
-
-            }
-            else if (answers[4].equalsIgnoreCase("sport")) {
-
-            }
-            else if (answers[4].equalsIgnoreCase("music")) {
-
-            }
-
-        }
-        return null;
-    }
-
-
-    public Integer[] counts(String[] singleSurvey, int index) {
-        ArrayList<Integer> counts = null;
-        return null;
     }
 }
