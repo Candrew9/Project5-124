@@ -1,0 +1,243 @@
+package prj5;
+
+/**
+ * A class that is designed to be able to take a given input file and output
+ * 
+ * @author Andrew Caldwell (candrew9)
+ * @version 2018.11.11
+ *
+ */
+public class CombinationCalculator {
+
+    // fields
+
+    private String[][] survey;
+    private String representation;
+    private Integer[] likePercent;
+    private Integer[] heardPercent;
+    private String[] groups;
+    private int index;
+    private int groupColumnIndex;
+    // need to add private enum fields
+
+
+    /**
+     * Creates a CombinationCalculator object
+     * 
+     * @param survey
+     *            2D array with questionnaire answers
+     * @param index
+     *            Row number of specific questionnaire answer
+     * @param representation
+     *            Type of representation to sort by (hobby, major, region)
+     */
+    public CombinationCalculator(
+        String[][] survey,
+        int index,
+        String representation) {
+        this.survey = survey;
+        this.index = index;
+        this.representation = representation;
+        groups = setGroupOptions();
+        likePercent = new Integer[4];
+        heardPercent = new Integer[4];
+        initPercentages();
+    }
+
+
+    /**
+     * Calculates the the percentage of the given enum fields
+     * 
+     * @return an array containing the result of each of the arrays given from
+     *         the DLList
+     */
+    public double[] percent() {
+        // list needs to be added here
+        // some other array I made up
+        int[][] temp = new int[4][1];
+
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                temp[row][col] = col;
+            }
+        }
+
+        // real code goes here
+
+        // sum of recorded yes's
+        int sum = 0;
+        double ans = 0.0;
+        double[] result = new double[4];
+
+        for (int i = 0; i < temp.length; i++) {
+
+            for (int j = 0; j < temp[i].length; j++) {
+                if (temp[i][j] == 0) {
+                    sum++;
+                }
+
+                // calculate percentage array
+                if (j == temp[i].length - 1) {
+                    ans = sum / (temp[i].length);
+                }
+            }
+
+            // update result array
+            result[i] = ans;
+
+        }
+
+        return result;
+
+    }
+
+
+    /**
+     * Determines the most common hobby
+     */
+    public int getCommonHobby() {
+        // TODO
+        return 0;
+    }
+
+
+    /**
+     * Calculates the percentage of Likes for a single song
+     * Yes/(Yes+No)
+     * 
+     * @param choice
+     *            The specific attribute (northeast, reading, cs)
+     * @return The percentage of Likes yes
+     */
+    public int countLikes(String choice) {
+        Double yesCount = 0.0;
+        Double totalCount = 0.0;
+        for (int i = 1; i < survey.length; i++) // Rows
+        {
+            if (survey[i][groupColumnIndex].equalsIgnoreCase(choice)) {
+                if (survey[i][index + 5].equalsIgnoreCase("yes")) // Likes
+                {
+                    yesCount++;
+                    totalCount++;
+                }
+                else if (survey[i][index + 5].equalsIgnoreCase("no")) {
+                    totalCount++;
+                }
+            }
+        }
+        if (totalCount == 0) {
+            return 0;
+        }
+        Double percent = (yesCount / totalCount) * 100;
+        return percent.intValue();
+    }
+
+
+    /**
+     * Calculates the percentage of Heard for a single song
+     * Yes/(Yes+No)
+     * 
+     * @param choice
+     *            The specific attribute (northeast, reading, cs)
+     * @return The percentage of Heard yes
+     */
+    public int countHeard(String choice) {
+        Double yesCount = 0.0;
+        Double totalCount = 0.0;
+        for (int i = 1; i < survey.length; i++) // Rows
+        {
+            if (survey[i][groupColumnIndex].equalsIgnoreCase(choice)) {
+                if (survey[i][index + 4].equalsIgnoreCase("yes")) // Heard
+                {
+                    yesCount++;
+                    totalCount++;
+                }
+                else if (survey[i][index + 4].equalsIgnoreCase("no")) {
+                    totalCount++;
+                }
+            }
+        }
+        if (totalCount == 0) {
+            return 0;
+        }
+        Double percent = (yesCount / totalCount) * 100;
+        return percent.intValue();
+    }
+
+
+    /**
+     * Initializes the likes and heard percentages for a single song
+     */
+    public void initPercentages() {
+        for (int i = 0; i < groups.length; i++) {
+            likePercent[i] = countLikes(groups[i]);
+            heardPercent[i] = countHeard(groups[i]);
+        }
+    }
+
+
+    /**
+     * Converts the percentage of likes into a String
+     * Standard order
+     * @return String of representations with associated percentages
+     */
+    public String likePercentToString() {
+        String returnString = "";
+        for (int i = 0; i < groups.length; i++) {
+            returnString += groups[i] + likePercent[i];
+            if (i != groups.length - 1) {
+                returnString += " ";
+            }
+        }
+        return returnString;
+    }
+
+
+    /**
+     * Converts the percentage of heard into a String
+     * Standard order
+     * @return String of representations with associated percentages
+     */
+    public String heardPercentToString() {
+        String returnString = "";
+        for (int i = 0; i < groups.length; i++) {
+            returnString += groups[i] + heardPercent[i];
+            if (i != groups.length - 1) {
+                returnString += " ";
+            }
+        }
+        return returnString;
+    }
+
+
+    /**
+     * Sets the column index with the associated representation
+     * and sets representation options (reading, art, etc)
+     * @return String array of representation options
+     */
+    public String[] setGroupOptions() {
+        String[] result = new String[4];
+        if (representation.equalsIgnoreCase("Hobby")) {
+            result[0] = "reading";
+            result[1] = "art";
+            result[2] = "sports";
+            result[3] = "music";
+            groupColumnIndex = 4;
+        }
+        else if (representation.equalsIgnoreCase("Major")) {
+            result[0] = "computer science";
+            result[1] = "other engineering";
+            result[2] = "math or cmda";
+            result[3] = "other";
+            groupColumnIndex = 2;
+        }
+        else if (representation.equalsIgnoreCase("Region")) {
+            result[0] = "northeast";
+            result[1] = "southeast";
+            result[2] = "rest of us";
+            result[3] = "outside of us";
+            groupColumnIndex = 3;
+        }
+        return result;
+    }
+}
