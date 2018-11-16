@@ -1,0 +1,16 @@
+/**
+     * Sorts the list to be in alphabetical order
+     * 
+     * @param str
+     */
+    public void sortAlphabetically(String[] str) {
+        for (int all = 0; all < str.length; all++) {
+            for (int i = all + 1; i < str.length; i++) {
+                if (str[all].compareTo(str[i]) > 0) {
+                    String tmp = str[i];
+                    str[i] = str[all];
+                    str[all] = tmp;
+                }
+            }
+        }
+    }
