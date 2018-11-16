@@ -1,0 +1,179 @@
+/**
+ * 
+ */
+package prj5;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+
+/**
+ * @author Brooke Fey
+ * @version 2018.11.11
+ */
+public class Input {
+
+    private static Scanner scanSurvey;
+    private static Scanner scanSong;
+    private static DLList<String> outputLinks;
+    private static String[][] surveyData;
+    private static String[][] songList;
+    private static String[] andrewThing;
+
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        FileReader fileSurvey = null;
+        FileReader fileSongList = null;
+        BufferedReader bufferSurvey = null;
+        BufferedReader bufferSongList = null;
+        String result = "";
+        outputLinks = new DLList<String>();
+        // songList = new ArrayList<String[]>();
+        List<String[]> surveyRows = new ArrayList<String[]>();
+        List<String[]> songRows = new ArrayList<String[]>();
+        try {
+            // Sets up scanners
+            fileSurvey = new FileReader(args[0]);
+            fileSongList = new FileReader(args[1]);
+            bufferSurvey = new BufferedReader(fileSurvey);
+            bufferSongList = new BufferedReader(fileSongList);
+            scanSurvey = new Scanner(bufferSurvey);
+            scanSong = new Scanner(bufferSongList);
+            // Puts csv lines in a column
+            while (scanSurvey.hasNextLine()) {
+                String line = scanSurvey.nextLine();
+                String[] separator = line.split(",");
+                // survey.add(separator);
+                surveyRows.add(separator);
+                // System.out.println(separator);
+                // System.out.println(Arrays.toString(separator));
+            }
+            while (scanSong.hasNextLine()) {
+                String[] songs = scanSong.nextLine().split(",");
+                // songList.add(songs);
+                songRows.add(songs);
+            }
+            surveyData = new String[surveyRows.size()][0];
+            surveyData = surveyRows.toArray(surveyData);
+            songList = new String[songRows.size()][0];
+            songList = songRows.toArray(songList);
+            andrewThing = new String[songList.length];
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        scanSurvey.close();
+        scanSong.close();
+        // System.out.println(outputToString());
+        // System.out.println(songList[1][3]);
+        // System.out.println(songList.length);
+
+        // sortAlphabetically(andrewThing);
+        String invoker = outputToString();
+        // String[] array = sortAlphabetically(andrewThing);
+        // for (int i = 0; i < array.length; i++) {
+        // System.out.println(array[i]);
+        // }
+        DLList<String> invokee = sortbyGenreThenTitle();
+        //for (int i = 0; i < invokee.size(); i++) {
+            System.out.println(invokee.get(invokee.size()-1));
+        //}
+        // System.out.println(surveyData[5][5]);
+        // System.out.println(sortByGenre());
+
+    }
+
+
+    public static String outputToString() {
+        String outputHolder = "";
+        for (int i = 1; i < songList.length; i++) {
+            outputHolder += songList[0][0] + " " + songList[i][0] + "\n"; // Song
+                                                                          // title
+            outputHolder += "song " + songList[0][1] + " " + songList[i][1]
+                + "\n"; // Song
+                        // Artist
+            outputHolder += "song " + songList[0][3] + " " + songList[i][3]
+                + "\n"; // Song
+                        // year,
+                        // different
+                        // order
+                        // between
+                        // csv
+                        // and
+            // test
+            outputHolder += "song " + songList[0][2] + " " + songList[i][2]
+                + "\n"; // Song
+                        // genre
+            outputHolder += "heard" + "\n"; // heard header
+            CombinationCalculator combo = new CombinationCalculator(surveyData,
+                i, "Hobby");
+            outputHolder += combo.heardPercentToString() + "\n"; // heard
+                                                                 // percentages
+            outputHolder += "likes" + "\n"; // likes header
+            outputHolder += combo.likePercentToString() + "\n"; // likes
+                                                                // percentages
+            outputHolder += "\n";
+            outputLinks.add(outputHolder);
+            andrewThing[i] = outputHolder;
+        }
+
+        return outputHolder;
+    }
+
+
+    /**
+     * Sorts the list to be in alphabetical order
+     * 
+     * @param str
+     */
+    public static String[] sortAlphabetically(String[] str) {
+        for (int all = 0; all < str.length; all++) {
+            for (int i = all + 1; i < str.length; i++) {
+                if (str[all].compareTo(str[i]) > 0) {
+                    String tmp = str[i];
+                    str[i] = str[all];
+                    str[all] = tmp;
+                }
+            }
+        }
+        return str;
+    }
+
+
+    public static DLList<String> sortbyGenreThenTitle() {
+        DLList<String> result = new DLList<String>();
+        Set<String> genreSet = new HashSet<String>();
+        Set<String> titleSet = new HashSet<String>();
+        for (int i = 1; i < songList.length; i++) {
+            genreSet.add(songList[i][3]);
+            titleSet.add(songList[i][0]);
+        }
+        String[] genres = genreSet.toArray(new String[genreSet.size()]);
+        String[] titles = titleSet.toArray(new String[titleSet.size()]);
+        // String[] genres = (String[])genreSet.toArray();
+        // String[] titles = (String[])genreSet.toArray();
+        genres = sortAlphabetically(genres);
+        titles = sortAlphabetically(titles);
+        for (int i = 0; i < genres.length; i++) {
+            for (int j = 0; j < titles.length; j++) {
+                for (int k = 0; k < outputLinks.size(); k++) {
+                    if (outputLinks.get(k).contains(genres[i]) && outputLinks
+                        .get(k).contains(titles[j])) {
+                        result.add(outputLinks.get(k));
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
