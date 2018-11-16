@@ -1,15 +1,17 @@
 /**
  * 
  */
-package prj5;
+package doublylinkedlist;
 
 import CS2114.Button;
 import CS2114.Shape;
 import CS2114.TextShape;
 import CS2114.Window;
+import CS2114.WindowSide;
+import java.awt.Color;
 
 /**
- * @author Brooke Fey
+ * @author Cole Steigman, Brooke Fey, Andrew Caldwell
  * @version 2018.11.11
  */
 public class DisplayWindow {
@@ -17,7 +19,7 @@ public class DisplayWindow {
     private Window window;
     private Button sortByArtistNameButton;
     private Button sortBySongTitleButton;
-    private Button sortByReleaseyearButton;
+    private Button sortByReleaseYearButton;
     private Button sortByGenreButton;
     private Button representHobbyButton;
     private Button representMajorButton;
@@ -25,6 +27,101 @@ public class DisplayWindow {
     private Button quitButton;
     private Button previousButton;
     private Button nextButton;
-    private TextShape legendText;
-    private Shape barShape;
+    private TextShape legendHobbyText;
+    private TextShape legendReadText;
+    private TextShape legendArtText;
+    private TextShape legendSportsText;
+    private TextShape legendMusicText;
+    private TextShape legendSongTitleText;
+    private TextShape legendHeardText;
+    private TextShape legendLikesText;
+    private Shape bar1Shape;
+    private Shape bar2Shape;
+    private Shape bar3Shape;
+    private Shape bar4Shape;
+    private Shape barVertShape;
+    private TextShape songTitleText;
+    private TextShape songArtistText;
+    
+    public DisplayWindow()
+    {
+        window = new Window();
+        window.setTitle("Project 5");
+        
+        //Sets up the buttons
+        previousButton = new Button("Previous");
+        window.addButton(previousButton, WindowSide.NORTH);
+        sortByArtistNameButton = new Button("Sort By Artist Name");
+        window.addButton(sortByArtistNameButton, WindowSide.NORTH);
+        sortBySongTitleButton = new Button("Sort By Song Title");
+        window.addButton(sortBySongTitleButton, WindowSide.NORTH);
+        sortByReleaseYearButton = new Button("Sort By Release Year");
+        window.addButton(sortByReleaseYearButton, WindowSide.NORTH);
+        sortByGenreButton = new Button("Sort By Genre Button");
+        window.addButton(sortByGenreButton, WindowSide.NORTH);
+        representHobbyButton = new Button("Represent Hobby");
+        window.addButton(representHobbyButton, WindowSide.SOUTH);
+        representMajorButton = new Button("Represent Major");
+        window.addButton(representMajorButton, WindowSide.SOUTH);
+        representRegionButton = new Button("Represent Region");
+        window.addButton(representRegionButton, WindowSide.SOUTH);
+        quitButton = new Button("Quit");
+        window.addButton(quitButton, WindowSide.SOUTH);
+        nextButton = new Button("Next");
+        window.addButton(nextButton, WindowSide.NORTH);
+        
+        //Legend
+        legendHobbyText = new TextShape(620, 300, "Hobby Legend");
+        legendHobbyText.setBackgroundColor(Color.WHITE);
+        window.addShape(legendHobbyText);
+        legendReadText = new TextShape(600, 320, "Read");
+        legendReadText.setBackgroundColor(Color.WHITE);
+        legendReadText.setForegroundColor(Color.PINK);
+        window.addShape(legendReadText);
+        legendArtText = new TextShape(600, 340, "Art");
+        legendArtText.setBackgroundColor(Color.WHITE);
+        legendArtText.setForegroundColor(Color.BLUE);
+        window.addShape(legendArtText);
+        legendSportsText = new TextShape(600, 360, "Sports");
+        legendSportsText.setBackgroundColor(Color.WHITE);
+        legendSportsText.setForegroundColor(Color.ORANGE);
+        window.addShape(legendSportsText);
+        legendMusicText = new TextShape(600, 380, "Music");
+        legendMusicText.setBackgroundColor(Color.WHITE);
+        legendMusicText.setForegroundColor(Color.GREEN);
+        window.addShape(legendMusicText);
+        legendSongTitleText = new TextShape(620, 400, "Song Title");
+        legendSongTitleText.setBackgroundColor(Color.WHITE);
+        window.addShape(legendSongTitleText);
+        legendHeardText = new TextShape(600, 430, "Heard");
+        legendHeardText.setBackgroundColor(Color.WHITE);
+        window.addShape(legendHeardText);
+        legendLikesText = new TextShape(680, 430, "Likes");
+        legendLikesText.setBackgroundColor(Color.WHITE);
+        window.addShape(legendLikesText);
+        barVertShape = new Shape(660, 410, 10, 50, Color.BLACK);
+        window.addShape(barVertShape);
+        
+        //Glyph
+        barVertShape = new Shape(180, 100, 10, 40, Color.BLACK);
+        window.addShape(barVertShape);
+        bar1Shape = new Shape(150, 100, 100, 10, Color.PINK);
+        window.addShape(bar1Shape);
+        bar2Shape = new Shape(140, 110, 105, 10, Color.BLUE);
+        window.addShape(bar2Shape);
+        bar3Shape = new Shape(100, 120, 120, 10, Color.ORANGE);
+        window.addShape(bar3Shape);
+        bar4Shape = new Shape(120, 130, 150, 10, Color.GREEN);
+        window.addShape(bar4Shape);
+        songTitleText = new TextShape(140, 60, "Gold Digger");
+        songTitleText.setBackgroundColor(Color.WHITE);
+        window.addShape(songTitleText);
+        songArtistText = new TextShape(140, 80, "by Kanye West");
+        songArtistText.setBackgroundColor(Color.WHITE);
+        window.addShape(songArtistText);
+        
+
+        
+        
+    }
 }
