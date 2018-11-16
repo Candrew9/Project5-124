@@ -1,0 +1,29 @@
+package prj5;
+import prj5.DisplayWindow;
+
+/**
+ * runs the project
+ * @author Cole Steigman coles14
+ * @version 9.17.2018
+ */
+public class ProjectRunner {
+    
+    /**
+     * constructor for ProjectRunner class
+     */
+    public ProjectRunner()
+        {
+            //default constructor
+        }
+    
+    /**
+     * main method to initiate a WhackAShape object
+     * @param args
+     */
+    public static void main(String[] args) {    
+        
+        {
+            DisplayWindow display = new DisplayWindow();
+        }
+    }
+}
