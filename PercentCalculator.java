@@ -305,5 +305,82 @@ public class PercentCalculator implements Comparator<String> {
         return (str1.compareTo(str2));
     }
     
-    //Make a method that puts the results into an array
+    /**
+     * Creates a integer array containing the percentages of the likes by Hobby,
+     * Region or class
+     * 
+     * @param category
+     *            integer representing which category to calculate the
+     *            percentage of likes for
+     * 
+     * @return an integer array containing the percentage of the total likes for
+     *         each track
+     */
+    public int[] percentageHeard(int category) {
+        int[] percent = new int[4];
+
+        if (category == 0) {
+
+            for (int i = 0; i < percent.length; i++) {
+                percent[i] = (heardMajor[i][0] / (heardMajor[i][0]
+                    + heardMajor[i][1]));
+            }
+        }
+        if (category == 1) {
+
+            for (int i = 0; i < percent.length; i++) {
+                percent[i] = (heardRegion[i][0] / (heardRegion[i][0]
+                    + heardRegion[i][1]));
+            }
+        }
+        else {
+
+            for (int i = 0; i < percent.length; i++) {
+                percent[i] = (heardHobby[i][0] / (heardHobby[i][0]
+                    + heardHobby[i][1]));
+            }
+        }
+        
+        return percent;
+
+    }
+    /**
+     * Creates a integer array containing the percentages of the likes by Hobby,
+     * Region or class
+     * 
+     * @param category
+     *            integer representing which category to calculate the
+     *            percentage of likes for
+     * 
+     * @return an integer array containing the percentage of the total likes for
+     *         each track
+     */
+    public int[] percentageLikes(int category) {
+        int[] percent = new int[4];
+
+        if (category == 0) {
+
+            for (int i = 0; i < percent.length; i++) {
+                percent[i] = (likedMajor[i][0] / (likedMajor[i][0]
+                    + likedMajor[i][1]));
+            }
+        }
+        if (category == 1) {
+
+            for (int i = 0; i < percent.length; i++) {
+                percent[i] = (likedRegion[i][0] / (likedRegion[i][0]
+                    + likedRegion[i][1]));
+            }
+        }
+        else {
+
+            for (int i = 0; i < percent.length; i++) {
+                percent[i] = (likedHobby[i][0] / (likedHobby[i][0]
+                    + likedHobby[i][1]));
+            }
+        }
+        
+        return percent;
+
+    }
 }
