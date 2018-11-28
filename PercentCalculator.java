@@ -326,7 +326,7 @@ public class PercentCalculator implements Comparator<String> {
                     + heardMajor[i][1]));
             }
         }
-        if (category == 1) {
+        else if (category == 1) {
 
             for (int i = 0; i < percent.length; i++) {
                 percent[i] = (heardRegion[i][0] / (heardRegion[i][0]
@@ -365,7 +365,7 @@ public class PercentCalculator implements Comparator<String> {
                     + likedMajor[i][1]));
             }
         }
-        if (category == 1) {
+        else if (category == 1) {
 
             for (int i = 0; i < percent.length; i++) {
                 percent[i] = (likedRegion[i][0] / (likedRegion[i][0]
