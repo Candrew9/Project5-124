@@ -1,0 +1,298 @@
+/**
+ * 
+ */
+package prj5;
+
+/**
+ * @author Brooke Fey (brofey)
+ * @version 2018.11.30
+ */
+public class PercentCalculatorTest extends student.TestCase {
+
+    private PercentCalculator calMajor;
+    private PercentCalculator calRegion;
+    private PercentCalculator calHobby;
+
+
+    /**
+     * Executes prior to every test method
+     */
+    public void setUp() {
+        calMajor = new PercentCalculator(0);
+        calRegion = new PercentCalculator(1);
+        calHobby = new PercentCalculator(2);
+
+    }
+
+
+    /**
+     * Tests the calculateMajors method
+     */
+    public void testCalculateMajors() {
+        // Computer Science
+        calMajor.calculate(0, "Computer Science", "Yes", "Yes");
+        assertEquals(1, calMajor.getHeardMajor()[0][0]);
+        assertEquals(1, calMajor.getLikedMajor()[0][0]);
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Computer Science", "No", "No");
+        assertEquals(0, calMajor.getHeardMajor()[0][0]);
+        assertEquals(0, calMajor.getLikedMajor()[0][0]);
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Computer Science", "Other", "Other");
+        assertEquals(0, calMajor.getHeardMajor()[0][0]);
+        assertEquals(0, calMajor.getLikedMajor()[0][0]);
+
+        // Math of CMDA
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Math or CMDA", "Yes", "Yes");
+        assertEquals(1, calMajor.getHeardMajor()[1][0]);
+        assertEquals(1, calMajor.getLikedMajor()[1][0]);
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Math or CMDA", "No", "No");
+        assertEquals(0, calMajor.getHeardMajor()[1][0]);
+        assertEquals(0, calMajor.getLikedMajor()[1][0]);
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Math or CMDA", "Other", "Other");
+        assertEquals(0, calMajor.getHeardMajor()[1][0]);
+        assertEquals(0, calMajor.getLikedMajor()[1][0]);
+
+        // Other Engineering
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Other Engineering", "Yes", "Yes");
+        assertEquals(1, calMajor.getHeardMajor()[2][0]);
+        assertEquals(1, calMajor.getLikedMajor()[2][0]);
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Other Engineering", "No", "No");
+        assertEquals(0, calMajor.getHeardMajor()[2][0]);
+        assertEquals(0, calMajor.getLikedMajor()[2][0]);
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Other Engineering", "Other", "Other");
+        assertEquals(0, calMajor.getHeardMajor()[2][0]);
+        assertEquals(0, calMajor.getLikedMajor()[2][0]);
+
+        // Other
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Other", "Yes", "Yes");
+        assertEquals(1, calMajor.getHeardMajor()[3][0]);
+        assertEquals(1, calMajor.getLikedMajor()[3][0]);
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Other", "No", "No");
+        assertEquals(0, calMajor.getHeardMajor()[3][0]);
+        assertEquals(0, calMajor.getLikedMajor()[3][0]);
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Other", "Other", "Other");
+        assertEquals(0, calMajor.getHeardMajor()[3][0]);
+        assertEquals(0, calMajor.getLikedMajor()[3][0]);
+
+        // All Fail Case
+        calMajor = new PercentCalculator(0); // resets calMajor
+        calMajor.calculate(0, "Fail", "Other", "Other");
+        assertEquals(0, calMajor.getHeardMajor()[3][0]);
+        assertEquals(0, calMajor.getLikedMajor()[3][0]);
+    }
+
+
+    /**
+     * Tests the calculateRegion method
+     */
+    public void testCalculateRegion() {
+        // Northeast
+        calRegion.calculate(1, "Northeast", "Yes", "Yes");
+        assertEquals(1, calRegion.getHeardRegion()[0][0]);
+        assertEquals(1, calRegion.getLikedRegion()[0][0]);
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1, "Northeast", "No", "No");
+        assertEquals(0, calRegion.getHeardRegion()[0][0]);
+        assertEquals(0, calRegion.getLikedRegion()[0][0]);
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1, "Northeast", "Other", "Other");
+        assertEquals(0, calRegion.getHeardRegion()[0][0]);
+        assertEquals(0, calRegion.getLikedRegion()[0][0]);
+
+        // Southeast
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1, "Southeast", "Yes", "Yes");
+        assertEquals(1, calRegion.getHeardRegion()[1][0]);
+        assertEquals(1, calRegion.getLikedRegion()[1][0]);
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1, "Southeast", "No", "No");
+        assertEquals(0, calRegion.getHeardRegion()[1][0]);
+        assertEquals(0, calRegion.getLikedRegion()[1][0]);
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1, "Southeast", "Other", "Other");
+        assertEquals(0, calRegion.getHeardRegion()[1][0]);
+        assertEquals(0, calRegion.getLikedRegion()[1][0]);
+
+        // US other
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1,
+            "United States (other than Southeast or Northwest", "Yes", "Yes");
+        assertEquals(1, calRegion.getHeardRegion()[2][0]);
+        assertEquals(1, calRegion.getLikedRegion()[2][0]);
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1,
+            "United States (other than Southeast or Northwest", "No", "No");
+        assertEquals(0, calRegion.getHeardRegion()[2][0]);
+        assertEquals(0, calRegion.getLikedRegion()[2][0]);
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1,
+            "United States (other than Southeast or Northwest", "Other",
+            "Other");
+        assertEquals(0, calRegion.getHeardRegion()[2][0]);
+        assertEquals(0, calRegion.getLikedRegion()[2][0]);
+
+        // Outside
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1, "Outside of United States", "Yes", "Yes");
+        assertEquals(1, calRegion.getHeardRegion()[3][0]);
+        assertEquals(1, calRegion.getLikedRegion()[3][0]);
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1, "Outside of United States", "No", "No");
+        assertEquals(0, calRegion.getHeardRegion()[3][0]);
+        assertEquals(0, calRegion.getLikedRegion()[3][0]);
+        calRegion = new PercentCalculator(1); // resets
+        calRegion.calculate(1, "Outside of United States", "Other", "Other");
+        assertEquals(0, calRegion.getHeardRegion()[3][0]);
+        assertEquals(0, calRegion.getLikedRegion()[3][0]);
+
+        // All Fail Case
+        calRegion = new PercentCalculator(1); // resets calMajor
+        calRegion.calculate(1, "Fail", "Other", "Other");
+        assertEquals(0, calRegion.getHeardRegion()[3][0]);
+        assertEquals(0, calRegion.getLikedRegion()[3][0]);
+    }
+
+
+    /**
+     * Tests the calculateHobby method
+     */
+    public void testCalculateHobby() {
+        // Music
+        calHobby.calculate(2, "music", "Yes", "Yes");
+        assertEquals(1, calHobby.getHeardHobby()[0][0]);
+        assertEquals(1, calHobby.getLikedHobby()[0][0]);
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "music", "No", "No");
+        assertEquals(0, calHobby.getHeardHobby()[0][0]);
+        assertEquals(0, calHobby.getLikedHobby()[0][0]);
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "music", "Other", "Other");
+        assertEquals(0, calHobby.getHeardHobby()[0][0]);
+        assertEquals(0, calHobby.getLikedHobby()[0][0]);
+
+        // Sports
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "sports", "Yes", "Yes");
+        assertEquals(1, calHobby.getHeardHobby()[1][0]);
+        assertEquals(1, calHobby.getLikedHobby()[1][0]);
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "sports", "No", "No");
+        assertEquals(0, calHobby.getHeardHobby()[1][0]);
+        assertEquals(0, calHobby.getLikedHobby()[1][0]);
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "sports", "Other", "Other");
+        assertEquals(0, calHobby.getHeardHobby()[1][0]);
+        assertEquals(0, calHobby.getLikedHobby()[1][0]);
+        // Sports
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "art", "Yes", "Yes");
+        assertEquals(1, calHobby.getHeardHobby()[2][0]);
+        assertEquals(1, calHobby.getLikedHobby()[2][0]);
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "art", "No", "No");
+        assertEquals(0, calHobby.getHeardHobby()[2][0]);
+        assertEquals(0, calHobby.getLikedHobby()[2][0]);
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "art", "Other", "Other");
+        assertEquals(0, calHobby.getHeardHobby()[2][0]);
+        assertEquals(0, calHobby.getLikedHobby()[2][0]);
+
+        // Reading
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "reading", "Yes", "Yes");
+        assertEquals(1, calHobby.getHeardHobby()[3][0]);
+        assertEquals(1, calHobby.getLikedHobby()[3][0]);
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "reading", "No", "No");
+        assertEquals(0, calHobby.getHeardHobby()[3][0]);
+        assertEquals(0, calHobby.getLikedHobby()[3][0]);
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "reading", "Other", "Other");
+        assertEquals(0, calHobby.getHeardHobby()[3][0]);
+        assertEquals(0, calHobby.getLikedHobby()[3][0]);
+
+        // All Fail Case
+        calHobby = new PercentCalculator(2); // resets
+        calHobby.calculate(2, "Fail", "Other", "Other");
+        assertEquals(0, calHobby.getHeardHobby()[3][0]);
+        assertEquals(0, calHobby.getLikedHobby()[3][0]);
+    }
+
+
+    /**
+     * Tests both percentage methods
+     */
+    public void testPercentage() {
+        // Major
+        calMajor.calculate(0, "Computer Science", "Yes", "Yes");
+        calMajor.calculate(0, "Computer Science", "Yes", "No");
+        calMajor.calculate(0, "Math or CMDA", "Yes", "Yes");
+        calMajor.calculate(0, "Math or CMDA", "Yes", "No");
+        calMajor.calculate(0, "Other Engineering", "Yes", "Yes");
+        calMajor.calculate(0, "Other Engineering", "Yes", "No");
+        calMajor.calculate(0, "Other", "Yes", "Yes");
+        calMajor.calculate(0, "Other", "Yes", "No");
+        int[] heardPercent = calMajor.percentageHeard(0);
+        int[] likePercent = calMajor.percentageLikes(0);
+        assertEquals(1, heardPercent[0]);
+        assertEquals(1, heardPercent[1]);
+        assertEquals(1, heardPercent[2]);
+        assertEquals(1, heardPercent[3]);
+        assertEquals(0, likePercent[0]);
+        assertEquals(0, likePercent[1]);
+        assertEquals(0, likePercent[2]);
+        assertEquals(0, likePercent[3]);
+
+        // Region
+        calRegion.calculate(1, "Northeast", "Yes", "Yes");
+        calRegion.calculate(1, "Northeast", "Yes", "No");
+        calRegion.calculate(1, "Southeast", "Yes", "Yes");
+        calRegion.calculate(1, "Southeast", "Yes", "No");
+        calRegion.calculate(1,
+            "United States (other than Southeast or Northwest", "Yes", "Yes");
+        calRegion.calculate(1,
+            "United States (other than Southeast or Northwest", "Yes", "No");
+        calRegion.calculate(1, "Outside of United States", "Yes", "Yes");
+        calRegion.calculate(1, "Outside of United States", "Yes", "No");
+        heardPercent = calRegion.percentageHeard(1);
+        likePercent = calRegion.percentageLikes(1);
+        assertEquals(1, heardPercent[0]);
+        assertEquals(1, heardPercent[1]);
+        assertEquals(1, heardPercent[2]);
+        assertEquals(1, heardPercent[3]);
+        assertEquals(0, likePercent[0]);
+        assertEquals(0, likePercent[1]);
+        assertEquals(0, likePercent[2]);
+        assertEquals(0, likePercent[3]);
+
+        // Hobby
+        calHobby.calculate(2, "music", "Yes", "Yes");
+        calHobby.calculate(2, "music", "Yes", "No");
+        calHobby.calculate(2, "sports", "Yes", "Yes");
+        calHobby.calculate(2, "sports", "Yes", "No");
+        calHobby.calculate(2, "art", "Yes", "Yes");
+        calHobby.calculate(2, "art", "Yes", "No");
+        calHobby.calculate(2, "reading", "Yes", "Yes");
+        calHobby.calculate(2, "reading", "Yes", "No");
+        heardPercent = calHobby.percentageHeard(2);
+        likePercent = calHobby.percentageLikes(2);
+        assertEquals(1, heardPercent[0]);
+        assertEquals(1, heardPercent[1]);
+        assertEquals(1, heardPercent[2]);
+        assertEquals(1, heardPercent[3]);
+        assertEquals(0, likePercent[0]);
+        assertEquals(0, likePercent[1]);
+        assertEquals(0, likePercent[2]);
+        assertEquals(0, likePercent[3]);
+    }
+}
