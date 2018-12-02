@@ -1,5 +1,5 @@
 package prj5;
-import prj5.DisplayWindow;
+import prj5.GUIDisplayWindow;
 
 /**
  * runs the project
@@ -23,7 +23,9 @@ public class ProjectRunner {
     public static void main(String[] args) {    
         
         {
-            DisplayWindow display = new DisplayWindow();
+            GUIDisplayWindow display = new GUIDisplayWindow();
         }
     }
+    
+    
 }
