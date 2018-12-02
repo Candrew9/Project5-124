@@ -284,6 +284,8 @@ public class PercentCalculator implements Comparator<String> {
      * 
      * @param category
      *            the type of survey results changed (i.e. major, region, hobby)
+     * @param survey
+     *            the survey result being targeted for the category
      * @param heards
      *            the heards found from the results of this survey
      * @param likes
