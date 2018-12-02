@@ -7,75 +7,75 @@ package prj5;
  * @author Brooke Fey
  * @version 2018.11.29
  */
-public class TrackTest extends student.TestCase{
+public class TrackTest extends student.TestCase {
 
     private Track track1;
     private Track track2;
     private Track trackEmpty;
-    
-    public void setUp()
-    {
+
+
+    /**
+     * Executes prior to each test run
+     */
+    public void setUp() {
         track1 = new Track("Name A", "Artist A", "Date A", "Genre A");
         track2 = new Track("Name B", "Artist B", "Date B", "Genre B");
         trackEmpty = new Track(null, null, null, null);
     }
-    
+
+
     /**
      * Tests the getArtist method
      */
-    public void testGetArtist()
-    {
+    public void testGetArtist() {
         assertEquals("Artist A", track1.getArtist());
         assertEquals("Artist B", track2.getArtist());
         assertNull(trackEmpty.getArtist());
     }
-    
+
+
     /**
      * Tests the getName method
      */
-    public void testGetName()
-    {
+    public void testGetName() {
         assertEquals("Name A", track1.getName());
         assertEquals("Name B", track2.getName());
         assertNull(trackEmpty.getName());
     }
-    
+
+
     /**
      * Tests the getDate method
      */
-    public void testGetDate()
-    {
+    public void testGetDate() {
         assertEquals("Date A", track1.getDate());
         assertEquals("Date B", track2.getDate());
         assertNull(trackEmpty.getDate());
     }
-    
+
+
     /**
      * Tests the getGenre method
      */
-    public void testGetGenre()
-    {
+    public void testGetGenre() {
         assertEquals("Genre A", track1.getGenre());
         assertEquals("Genre B", track2.getGenre());
         assertNull(trackEmpty.getGenre());
     }
-    
+
+
     /**
      * Tests the toString method
      */
-    public void testToString()
-    {
-        assertEquals("Song Title: Name A" + "\n"
-            + "Song Artist: Artist A" + "\n"
-            + "Song Genre: Genre A" + "\n"
-            + "Song Year: Date A" + "\n", track1.toString());
-        assertEquals("Song Title: Name B" + "\n"
-            + "Song Artist: Artist B" + "\n"
-            + "Song Genre: Genre B" + "\n"
-            + "Song Year: Date B" + "\n", track2.toString());
-        assertEquals("Song Title: null" + "\n"
-            + "Song Artist: null" + "\n"
-            + "Song Genre: null" + "\n"
-            + "Song Year: null" + "\n", trackEmpty.toString());
+    public void testToString() {
+        assertEquals("Song Title: Name A" + "\n" + "Song Artist: Artist A"
+            + "\n" + "Song Genre: Genre A" + "\n" + "Song Year: Date A" + "\n",
+            track1.toString());
+        assertEquals("Song Title: Name B" + "\n" + "Song Artist: Artist B"
+            + "\n" + "Song Genre: Genre B" + "\n" + "Song Year: Date B" + "\n",
+            track2.toString());
+        assertEquals("Song Title: null" + "\n" + "Song Artist: null" + "\n"
+            + "Song Genre: null" + "\n" + "Song Year: null" + "\n", trackEmpty
+                .toString());
     }
 }
