@@ -18,7 +18,7 @@ import java.awt.Color;
  * @author Cole Steigman, Brooke Fey, Andrew Caldwell
  * @version 2018.11.11
  */
-public class DisplayWindow {
+public class GUIDisplayWindow {
 
     private Window window;
     private Button sortByArtistNameButton;
@@ -61,11 +61,11 @@ public class DisplayWindow {
     private String clicked;
     //Legend
     
-    public DisplayWindow()
+    public GUIDisplayWindow()
     {
         window = new Window();
-        window.setTitle("Project 5");
-        window.setSize(500,600);
+        window.setTitle("Project 5: coles14, brofey, candrew9");
+        window.setSize(1100,600);
         
         //Sets up the buttons
         previousButton = new Button("Previous");
@@ -102,6 +102,7 @@ public class DisplayWindow {
         makeLegend("Default");
         
         makeGlyph("Default", 0);    
+        clicked = "Hobby";
         
         input = new Input();
         percent = new PercentCalculator();
@@ -150,6 +151,7 @@ public class DisplayWindow {
         clicked = "Hobby";
         window.removeAllShapes();
         makeLegend("Hobby");
+        sortGlyphs(" ");
     }
     
     public void clickedRegion(Button region)
@@ -157,6 +159,7 @@ public class DisplayWindow {
         clicked = "Region";
         window.removeAllShapes();
         makeLegend("Region");
+        sortGlyphs(" ");
     }
     
     public void clickedMajor(Button major)
@@ -164,6 +167,7 @@ public class DisplayWindow {
         clicked = "Major";
         window.removeAllShapes();
         makeLegend("Major");
+        sortGlyphs(" ");
     }
     
     public void sortGlyphs(String sort)
@@ -193,6 +197,14 @@ public class DisplayWindow {
                 //Add sort by year method
             }
         }
+        else if (sort.equals("genre"))
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                makeGlyph(clicked, i);
+                //Genre sort
+            }
+        }
         else
         {
             for (int i = 0; i < 9; i++)
@@ -216,7 +228,7 @@ public class DisplayWindow {
         if (clicked.equals("Hobby"))
         {
             //Likes
-            bar1Shape = new Shape(barX, barY, percent.percentageLikes(2)[0], BAR_HEIGHT, Color.PINK); 
+            /*bar1Shape = new Shape(barX, barY, percent.percentageLikes(2)[0], BAR_HEIGHT, Color.PINK); 
             bar2Shape = new Shape(barX, barY + 10, percent.percentageLikes(2)[1], BAR_HEIGHT, Color.BLUE);
             bar3Shape = new Shape(barX, barY + 20, percent.percentageLikes(2)[2], BAR_HEIGHT, Color.ORANGE);
             bar4Shape = new Shape(barX, barY + 30, percent.percentageLikes(2)[3], BAR_HEIGHT, Color.GREEN);
@@ -226,6 +238,32 @@ public class DisplayWindow {
             bar6Shape = new Shape(barX - (10 + percent.percentageHeard(2)[1]), barY + 10, percent.percentageHeard(2)[1], BAR_HEIGHT, Color.BLUE);
             bar7Shape = new Shape(barX - (10 + percent.percentageHeard(2)[2]), barY + 20, percent.percentageHeard(2)[2], BAR_HEIGHT, Color.ORANGE);
             bar8Shape = new Shape(barX - (10 + percent.percentageHeard(2)[3]), barY + 30, percent.percentageHeard(2)[3], BAR_HEIGHT, Color.GREEN);
+            */
+            bar1Shape = new Shape(barX, barY, 50, BAR_HEIGHT, Color.PINK); 
+            bar2Shape = new Shape(barX, barY + 10, 100, BAR_HEIGHT, Color.BLUE);
+            bar3Shape = new Shape(barX, barY + 20, 80, BAR_HEIGHT, Color.ORANGE);
+            bar4Shape = new Shape(barX, barY + 30, 74, BAR_HEIGHT, Color.GREEN);
+            
+            //Heard
+            bar5Shape = new Shape(barX - (50), barY, 50, BAR_HEIGHT, Color.PINK); 
+            bar6Shape = new Shape(barX - (84), barY + 10, 84, BAR_HEIGHT, Color.BLUE);
+            bar7Shape = new Shape(barX - (74), barY + 20, 74, BAR_HEIGHT, Color.ORANGE);
+            bar8Shape = new Shape(barX - (92), barY + 30, 92, BAR_HEIGHT, Color.GREEN);
+            
+            window.addShape(bar1Shape);        
+            window.addShape(bar2Shape);        
+            window.addShape(bar3Shape);        
+            window.addShape(bar4Shape);
+            window.addShape(bar5Shape);        
+            window.addShape(bar6Shape);        
+            window.addShape(bar7Shape);        
+            window.addShape(bar8Shape);
+            songTitleText = new TextShape(barX - 30, barY - 40, songName); //Change to title
+            songTitleText.setBackgroundColor(Color.WHITE);
+            window.addShape(songTitleText);
+            songArtistText = new TextShape(barX - 30, barY - 20, artistName); //Change to name
+            songArtistText.setBackgroundColor(Color.WHITE);
+            window.addShape(songArtistText);
         }
         else if (clicked.equals("Major"))
         {
@@ -240,6 +278,21 @@ public class DisplayWindow {
             bar6Shape = new Shape(barX - (10 + percent.percentageHeard(2)[1]), barY + 10, percent.percentageHeard(2)[1], BAR_HEIGHT, Color.BLUE);
             bar7Shape = new Shape(barX - (10 + percent.percentageHeard(2)[2]), barY + 20, percent.percentageHeard(2)[2], BAR_HEIGHT, Color.ORANGE);
             bar8Shape = new Shape(barX - (10 + percent.percentageHeard(2)[3]), barY + 30, percent.percentageHeard(2)[3], BAR_HEIGHT, Color.GREEN);
+            
+            window.addShape(bar1Shape);        
+            window.addShape(bar2Shape);        
+            window.addShape(bar3Shape);        
+            window.addShape(bar4Shape);
+            window.addShape(bar5Shape);        
+            window.addShape(bar6Shape);        
+            window.addShape(bar7Shape);        
+            window.addShape(bar8Shape);
+            songTitleText = new TextShape(barX - 30, barY - 40, songName); //Change to title
+            songTitleText.setBackgroundColor(Color.WHITE);
+            window.addShape(songTitleText);
+            songArtistText = new TextShape(barX - 30, barY - 20, artistName); //Change to name
+            songArtistText.setBackgroundColor(Color.WHITE);
+            window.addShape(songArtistText);
         }
         else if (clicked.equals("Region"))
         {
@@ -254,38 +307,43 @@ public class DisplayWindow {
             bar6Shape = new Shape(barX - (10 + percent.percentageHeard(2)[1]), barY + 10, percent.percentageHeard(2)[1], BAR_HEIGHT, Color.BLUE);
             bar7Shape = new Shape(barX - (10 + percent.percentageHeard(2)[2]), barY + 20, percent.percentageHeard(2)[2], BAR_HEIGHT, Color.ORANGE);
             bar8Shape = new Shape(barX - (10 + percent.percentageHeard(2)[3]), barY + 30, percent.percentageHeard(2)[3], BAR_HEIGHT, Color.GREEN);
+            
+            window.addShape(bar1Shape);        
+            window.addShape(bar2Shape);        
+            window.addShape(bar3Shape);        
+            window.addShape(bar4Shape);
+            window.addShape(bar5Shape);        
+            window.addShape(bar6Shape);        
+            window.addShape(bar7Shape);        
+            window.addShape(bar8Shape);
+            songTitleText = new TextShape(barX - 30, barY - 40, songName); //Change to title
+            songTitleText.setBackgroundColor(Color.WHITE);
+            window.addShape(songTitleText);
+            songArtistText = new TextShape(barX - 30, barY - 20, artistName); //Change to name
+            songArtistText.setBackgroundColor(Color.WHITE);
+            window.addShape(songArtistText);
         }
         else
         {
             //Do nothing
         }                       
-        window.addShape(bar1Shape);        
-        window.addShape(bar2Shape);        
-        window.addShape(bar3Shape);        
-        window.addShape(bar4Shape);
-        songTitleText = new TextShape(barX + 10, barY - 40, songName); //Change to title
-        songTitleText.setBackgroundColor(Color.WHITE);
-        window.addShape(songTitleText);
-        songArtistText = new TextShape(barX + 10, barY - 20, artistName); //Change to name
-        songArtistText.setBackgroundColor(Color.WHITE);
-        window.addShape(songArtistText);
          
     }
     
     public int findBarX(int i)
     {
-        int x = (i % 3) * 100 + 150;
+        int x = (i % 3) * 300 + 150;
         return x;
     }
     
     public int findBarY(int i)
     {
         int y = 0;
-        if (i < 2)
+        if (i < 3)
         {
             y = 100;
         }
-        else if (i < 5)
+        else if (i < 6)
         {
             y = 250;
         }
@@ -300,56 +358,107 @@ public class DisplayWindow {
     {
         if (clicked.equals("Hobby"))
         {
-            legend0Text = new TextShape(620, 300, "Hobby Legend");
-            legend1Text = new TextShape(600, 320, "Read");
-            legend2Text = new TextShape(600, 340, "Art");
-            legend3Text = new TextShape(600, 360, "Sports");
-            legend4Text =  new TextShape(600, 380, "Music");
+            legend0Text = new TextShape(920, 300, "Hobby Legend");
+            legend1Text = new TextShape(900, 320, "Read");
+            legend2Text = new TextShape(900, 340, "Art");
+            legend3Text = new TextShape(900, 360, "Sports");
+            legend4Text =  new TextShape(900, 380, "Music");
+            legend0Text.setBackgroundColor(Color.WHITE);
+            window.addShape(legend0Text);
+            legend1Text.setBackgroundColor(Color.WHITE);
+            legend1Text.setForegroundColor(Color.PINK);
+            window.addShape(legend1Text);
+            legend2Text.setBackgroundColor(Color.WHITE);
+            legend2Text.setForegroundColor(Color.BLUE);
+            window.addShape(legend2Text);
+            legend3Text.setBackgroundColor(Color.WHITE);
+            legend3Text.setForegroundColor(Color.ORANGE);
+            window.addShape(legend3Text);
+            legend4Text.setBackgroundColor(Color.WHITE);
+            legend4Text.setForegroundColor(Color.GREEN);
+            window.addShape(legend4Text);
+            legendSongTitleText = new TextShape(920, 400, "Song Title");
+            legendSongTitleText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendSongTitleText);
+            legendHeardText = new TextShape(900, 430, "Heard");
+            legendHeardText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendHeardText);
+            legendLikesText = new TextShape(980, 430, "Likes");
+            legendLikesText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendLikesText);
+            barVertShape = new Shape(960, 410, 10, 50, Color.BLACK);
+            window.addShape(barVertShape);
         }
         else if(clicked.equals("Region"))
         {
-            legend0Text = new TextShape(620, 300, "Region Legend");
-            legend1Text = new TextShape(600, 320, "Northeast");
-            legend2Text = new TextShape(600, 340, "Southeast");
-            legend3Text = new TextShape(600, 360, "Other US");
-            legend4Text =  new TextShape(600, 380, "Outside US");
+            legend0Text = new TextShape(920, 300, "Region Legend");
+            legend1Text = new TextShape(900, 320, "Northeast");
+            legend2Text = new TextShape(900, 340, "Southeast");
+            legend3Text = new TextShape(900, 360, "Other US");
+            legend4Text =  new TextShape(900, 380, "Outside US");
+            legend0Text.setBackgroundColor(Color.WHITE);
+            window.addShape(legend0Text);
+            legend1Text.setBackgroundColor(Color.WHITE);
+            legend1Text.setForegroundColor(Color.PINK);
+            window.addShape(legend1Text);
+            legend2Text.setBackgroundColor(Color.WHITE);
+            legend2Text.setForegroundColor(Color.BLUE);
+            window.addShape(legend2Text);
+            legend3Text.setBackgroundColor(Color.WHITE);
+            legend3Text.setForegroundColor(Color.ORANGE);
+            window.addShape(legend3Text);
+            legend4Text.setBackgroundColor(Color.WHITE);
+            legend4Text.setForegroundColor(Color.GREEN);
+            window.addShape(legend4Text);
+            legendSongTitleText = new TextShape(920, 400, "Song Title");
+            legendSongTitleText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendSongTitleText);
+            legendHeardText = new TextShape(900, 430, "Heard");
+            legendHeardText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendHeardText);
+            legendLikesText = new TextShape(980, 430, "Likes");
+            legendLikesText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendLikesText);
+            barVertShape = new Shape(960, 410, 10, 50, Color.BLACK);
+            window.addShape(barVertShape);
         }
         else if (clicked.equals("Major"))
         {
-            legend0Text = new TextShape(620, 300, "Major Legend");
-            legend1Text = new TextShape(600, 320, "Computer Science");
-            legend2Text = new TextShape(600, 340, "Other Engineering");
-            legend3Text = new TextShape(600, 360, "Math or CMDA");
-            legend4Text =  new TextShape(600, 380, "Other");
+            legend0Text = new TextShape(920, 300, "Major Legend");
+            legend1Text = new TextShape(900, 320, "Computer Science");
+            legend2Text = new TextShape(900, 340, "Other Engineering");
+            legend3Text = new TextShape(900, 360, "Math or CMDA");
+            legend4Text =  new TextShape(900, 380, "Other");
+            legend0Text.setBackgroundColor(Color.WHITE);
+            window.addShape(legend0Text);
+            legend1Text.setBackgroundColor(Color.WHITE);
+            legend1Text.setForegroundColor(Color.PINK);
+            window.addShape(legend1Text);
+            legend2Text.setBackgroundColor(Color.WHITE);
+            legend2Text.setForegroundColor(Color.BLUE);
+            window.addShape(legend2Text);
+            legend3Text.setBackgroundColor(Color.WHITE);
+            legend3Text.setForegroundColor(Color.ORANGE);
+            window.addShape(legend3Text);
+            legend4Text.setBackgroundColor(Color.WHITE);
+            legend4Text.setForegroundColor(Color.GREEN);
+            window.addShape(legend4Text);
+            legendSongTitleText = new TextShape(920, 400, "Song Title");
+            legendSongTitleText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendSongTitleText);
+            legendHeardText = new TextShape(900, 430, "Heard");
+            legendHeardText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendHeardText);
+            legendLikesText = new TextShape(980, 430, "Likes");
+            legendLikesText.setBackgroundColor(Color.WHITE);
+            window.addShape(legendLikesText);
+            barVertShape = new Shape(960, 410, 10, 50, Color.BLACK);
+            window.addShape(barVertShape);
         }
         else
         {
             //Do nothing
         }
-        legend0Text.setBackgroundColor(Color.WHITE);
-        window.addShape(legend0Text);
-        legend1Text.setBackgroundColor(Color.WHITE);
-        legend1Text.setForegroundColor(Color.PINK);
-        window.addShape(legend1Text);
-        legend2Text.setBackgroundColor(Color.WHITE);
-        legend2Text.setForegroundColor(Color.BLUE);
-        window.addShape(legend2Text);
-        legend3Text.setBackgroundColor(Color.WHITE);
-        legend3Text.setForegroundColor(Color.ORANGE);
-        window.addShape(legend3Text);
-        legend4Text.setBackgroundColor(Color.WHITE);
-        legend4Text.setForegroundColor(Color.GREEN);
-        window.addShape(legend4Text);
-        legendSongTitleText = new TextShape(620, 400, "Song Title");
-        legendSongTitleText.setBackgroundColor(Color.WHITE);
-        window.addShape(legendSongTitleText);
-        legendHeardText = new TextShape(600, 430, "Heard");
-        legendHeardText.setBackgroundColor(Color.WHITE);
-        window.addShape(legendHeardText);
-        legendLikesText = new TextShape(680, 430, "Likes");
-        legendLikesText.setBackgroundColor(Color.WHITE);
-        window.addShape(legendLikesText);
-        barVertShape = new Shape(660, 410, 10, 50, Color.BLACK);
-        window.addShape(barVertShape);
+
     }
 }
