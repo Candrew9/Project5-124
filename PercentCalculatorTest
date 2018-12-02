@@ -244,14 +244,14 @@ public class PercentCalculatorTest extends student.TestCase {
         calMajor.calculate(0, "Other", "Yes", "No");
         int[] heardPercent = calMajor.percentageHeard(0);
         int[] likePercent = calMajor.percentageLikes(0);
-        assertEquals(1, heardPercent[0]);
-        assertEquals(1, heardPercent[1]);
-        assertEquals(1, heardPercent[2]);
-        assertEquals(1, heardPercent[3]);
-        assertEquals(0, likePercent[0]);
-        assertEquals(0, likePercent[1]);
-        assertEquals(0, likePercent[2]);
-        assertEquals(0, likePercent[3]);
+        assertEquals(100, heardPercent[0]);
+        assertEquals(100, heardPercent[1]);
+        assertEquals(100, heardPercent[2]);
+        assertEquals(100, heardPercent[3]);
+        assertEquals(50, likePercent[0]);
+        assertEquals(50, likePercent[1]);
+        assertEquals(50, likePercent[2]);
+        assertEquals(50, likePercent[3]);
 
         // Region
         calRegion.calculate(1, "Northeast", "Yes", "Yes");
@@ -266,14 +266,14 @@ public class PercentCalculatorTest extends student.TestCase {
         calRegion.calculate(1, "Outside of United States", "Yes", "No");
         heardPercent = calRegion.percentageHeard(1);
         likePercent = calRegion.percentageLikes(1);
-        assertEquals(1, heardPercent[0]);
-        assertEquals(1, heardPercent[1]);
-        assertEquals(1, heardPercent[2]);
-        assertEquals(1, heardPercent[3]);
-        assertEquals(0, likePercent[0]);
-        assertEquals(0, likePercent[1]);
-        assertEquals(0, likePercent[2]);
-        assertEquals(0, likePercent[3]);
+        assertEquals(100, heardPercent[0]);
+        assertEquals(100, heardPercent[1]);
+        assertEquals(100, heardPercent[2]);
+        assertEquals(100, heardPercent[3]);
+        assertEquals(50, likePercent[0]);
+        assertEquals(50, likePercent[1]);
+        assertEquals(50, likePercent[2]);
+        assertEquals(50, likePercent[3]);
 
         // Hobby
         calHobby.calculate(2, "music", "Yes", "Yes");
@@ -286,13 +286,26 @@ public class PercentCalculatorTest extends student.TestCase {
         calHobby.calculate(2, "reading", "Yes", "No");
         heardPercent = calHobby.percentageHeard(2);
         likePercent = calHobby.percentageLikes(2);
-        assertEquals(1, heardPercent[0]);
-        assertEquals(1, heardPercent[1]);
-        assertEquals(1, heardPercent[2]);
-        assertEquals(1, heardPercent[3]);
-        assertEquals(0, likePercent[0]);
-        assertEquals(0, likePercent[1]);
-        assertEquals(0, likePercent[2]);
-        assertEquals(0, likePercent[3]);
+        assertEquals(100, heardPercent[0]);
+        assertEquals(100, heardPercent[1]);
+        assertEquals(100, heardPercent[2]);
+        assertEquals(100, heardPercent[3]);
+        assertEquals(50, likePercent[0]);
+        assertEquals(50, likePercent[1]);
+        assertEquals(50, likePercent[2]);
+        assertEquals(50, likePercent[3]);
+    }
+    
+    
+    /**
+     * Tests the calculatePercentagesWithInts() method
+     */
+    public void testCalculatePercentagesWithInts()
+    {
+        assertEquals(0, calHobby.calculatePercentageWithInts(0,0));
+        assertEquals(33, calHobby.calculatePercentageWithInts(1,2));
+        assertEquals(66, calHobby.calculatePercentageWithInts(2,1));
+        assertEquals(75, calHobby.calculatePercentageWithInts(3,1));
+        assertEquals(44, calHobby.calculatePercentageWithInts(4,5));
     }
 }
