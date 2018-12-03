@@ -15,7 +15,7 @@ import java.awt.Color;
 
 /**
  * Creates a window
- * @author Cole Steigman, Brooke Fey, Andrew Caldwell
+ * @author Andrew Caldwell candrew9, Brook Fey brofey, Cole Steigman coles14
  * @version 2018.11.11
  */
 public class GUIDisplayWindow {
@@ -55,12 +55,16 @@ public class GUIDisplayWindow {
     
     //Glyph
     private static final int BAR_HEIGHT = 10;
-    private CombinationCalculator calc;
     private Input input;
     private PercentCalculator percent;
     private String clicked;
+    private TrackComparator compare;
+    private DLList<Track> tracks;
     //Legend
     
+    /**
+     * sets up the gui
+     */
     public GUIDisplayWindow()
     {
         window = new Window();
@@ -97,55 +101,92 @@ public class GUIDisplayWindow {
         quitButton.onClick(this, "clickedQuit");
         nextButton = new Button("Next");
         window.addButton(nextButton, WindowSide.NORTH);
-        nextButton.onClick(this, "clickedNext");
-        
-        makeLegend("Default");
-        
+        nextButton.onClick(this, "clickedNext");        
+        makeLegend("Default");        
         makeGlyph("Default", 0);    
-        clicked = "Hobby";
-        
+        clicked = "Hobby";        
         input = new Input();
-        percent = new PercentCalculator();
+        tracks = new DLList<Track>();
+        compare = new TrackComparator(tracks);
+        //percent = new PercentCalculator();
         //percent.calculate(category, survey, heards, likes);
         
         
     }
     
+    /**
+     * quits application
+     * @param quit button
+     */
     public void clickedQuit(Button quit)
     {
         System.exit(0);
     }
     
+    /**
+     * next page
+     * @param next button
+     */
     public void clickedNext(Button next)
     {
-        
+        for (int i = 0; i < 9; i++)
+        {
+            tracks.iterator().next();
+        }        
     }
     
+    /**
+     * previous page
+     * @param prev button
+     */
     public void clickedPrev(Button prev)
     {
-        
+        for (int i = 0; i < 51; i++)
+        {
+            tracks.iterator().next();
+        } 
     }
     
+    /**
+     * sorts by artist
+     * @param name button
+     */
     public void clickedArtistName(Button name)
     {
         sortGlyphs("name");
     }
     
+    /**
+     * sorts by song title
+     * @param title button
+     */
     public void clickedSongTitle(Button title)
     {
         sortGlyphs("title");
     }
     
+    /**
+     * sorts by year
+     * @param year button
+     */
     public void clickedReleaseYear(Button year)
     {
         sortGlyphs("year");
     }
     
+    /**
+     * sorts by genre
+     * @param genre button
+     */
     public void clickedGenre(Button genre)
     {
         sortGlyphs("genre");
     }
     
+    /**
+     * shows hobby
+     * @param hobby button
+     */
     public void clickedHobby(Button hobby)
     {
         clicked = "Hobby";
@@ -154,6 +195,10 @@ public class GUIDisplayWindow {
         sortGlyphs(" ");
     }
     
+    /**
+     * shows region
+     * @param region button
+     */
     public void clickedRegion(Button region)
     {
         clicked = "Region";
@@ -162,6 +207,10 @@ public class GUIDisplayWindow {
         sortGlyphs(" ");
     }
     
+    /**
+     * shows major
+     * @param major button
+     */
     public void clickedMajor(Button major)
     {
         clicked = "Major";
@@ -170,6 +219,10 @@ public class GUIDisplayWindow {
         sortGlyphs(" ");
     }
     
+    /**
+     * sorts the glyphs
+     * @param sort string
+     */
     public void sortGlyphs(String sort)
     {
         glyphs = new AList<Shape>();
@@ -178,7 +231,7 @@ public class GUIDisplayWindow {
             for (int i = 0; i < 9; i++)
             {
                 makeGlyph(clicked, i);
-                //Add sort by name method
+                compare.sortByArtist();
             }
         }
         else if (sort.equals("title"))
@@ -186,7 +239,7 @@ public class GUIDisplayWindow {
             for (int i = 0; i < 9; i++)
             {
                 makeGlyph(clicked, i);
-                //Add sort by title method
+                compare.sortByName();
             }
         }
         else if (sort.equals("year"))
@@ -194,7 +247,7 @@ public class GUIDisplayWindow {
             for (int i = 0; i < 9; i++)
             {
                 makeGlyph(clicked, i);
-                //Add sort by year method
+                compare.sortByYear();
             }
         }
         else if (sort.equals("genre"))
@@ -202,7 +255,7 @@ public class GUIDisplayWindow {
             for (int i = 0; i < 9; i++)
             {
                 makeGlyph(clicked, i);
-                //Genre sort
+                compare.sortByGenre();
             }
         }
         else
@@ -215,6 +268,11 @@ public class GUIDisplayWindow {
         }
     }
     
+    /**
+     * makes the glyphs
+     * @param clicked string
+     * @param i int
+     */
     public void makeGlyph(String clicked, int i)
     {
         bars = new AList<Shape>();
@@ -239,6 +297,8 @@ public class GUIDisplayWindow {
             bar7Shape = new Shape(barX - (10 + percent.percentageHeard(2)[2]), barY + 20, percent.percentageHeard(2)[2], BAR_HEIGHT, Color.ORANGE);
             bar8Shape = new Shape(barX - (10 + percent.percentageHeard(2)[3]), barY + 30, percent.percentageHeard(2)[3], BAR_HEIGHT, Color.GREEN);
             */
+            
+            //Hard-coded for display purposes
             bar1Shape = new Shape(barX, barY, 50, BAR_HEIGHT, Color.PINK); 
             bar2Shape = new Shape(barX, barY + 10, 100, BAR_HEIGHT, Color.BLUE);
             bar3Shape = new Shape(barX, barY + 20, 80, BAR_HEIGHT, Color.ORANGE);
@@ -330,12 +390,22 @@ public class GUIDisplayWindow {
          
     }
     
+    /**
+     * gets location of x coordinate
+     * @param i int
+     * @return x int
+     */
     public int findBarX(int i)
     {
         int x = (i % 3) * 300 + 150;
         return x;
     }
     
+    /**
+     * gets location of y coordinate
+     * @param i int
+     * @return y int
+     */
     public int findBarY(int i)
     {
         int y = 0;
@@ -354,6 +424,10 @@ public class GUIDisplayWindow {
         return y;
     }
     
+    /**
+     * makes the legend
+     * @param clicked string
+     */
     public void makeLegend(String clicked)
     {
         if (clicked.equals("Hobby"))
