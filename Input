@@ -1,32 +1,31 @@
-/**
- * 
- */
 package prj5;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * @author Brooke Fey
+ * @author Andrew Caldwell candrew9, Brook Fey brofey, Cole Steigman coles14
  * @version 2018.11.11
  */
 public class Input {
 
     private static Scanner scanSurvey;
     private static Scanner scanSong;
-    // private static DLList<String[]> survey;
     private static String[][] surveyData;
     private static String[][] songList;
 
 
     /**
+     * Reads in the files and organizes a 2D array of the list of songs and the
+     * survey information
+     * The survey file should be first and the song list file should be second
+     * 
      * @param args
+     *            The files to form 2 2D arrays
      */
     public static void main(String[] args) {
         FileReader fileSurvey = null;
@@ -34,8 +33,6 @@ public class Input {
         BufferedReader bufferSurvey = null;
         BufferedReader bufferSongList = null;
         String result = "";
-        // survey = new DLList<String[]>();
-        // songList = new ArrayList<String[]>();
         List<String[]> surveyRows = new ArrayList<String[]>();
         List<String[]> songRows = new ArrayList<String[]>();
         try {
@@ -50,14 +47,10 @@ public class Input {
             while (scanSurvey.hasNextLine()) {
                 String line = scanSurvey.nextLine();
                 String[] separator = line.split(",");
-                // survey.add(separator);
                 surveyRows.add(separator);
-                // System.out.println(separator);
-                // System.out.println(Arrays.toString(separator));
             }
             while (scanSong.hasNextLine()) {
                 String[] songs = scanSong.nextLine().split(",");
-                // songList.add(songs);
                 songRows.add(songs);
             }
             surveyData = new String[surveyRows.size()][0];
@@ -70,35 +63,26 @@ public class Input {
         }
         scanSurvey.close();
         scanSong.close();
-        System.out.println(outputToString());
-        // System.out.println(songList[][0]);
-        // System.out.println(surveyData[5][5]);
-        // System.out.println(songList.length);
+        
     }
 
 
-    public static String outputToString() {
-        String outputHolder = "";
-        for (int i = 1; i < songList.length; i++) {
-            outputHolder += songList[0][0] + " " + songList[i][0] + "\n"; // Song
-                                                                          // title
-            outputHolder += "song " + songList[0][1] + " " + songList[i][1]
-                + "\n"; // Song Artist
-            outputHolder += "song " + songList[0][3] + " " + songList[i][3]
-                + "\n"; // Song year, different order between csv and
-            // test
-            outputHolder += "song " + songList[0][2] + " " + songList[i][2]
-                + "\n"; // Song genre
-            outputHolder += "heard" + "\n"; // heard header
-            CombinationCalculator combo = new CombinationCalculator(surveyData,
-                i, "Hobby");
-            outputHolder += combo.heardPercentToString() + "\n"; // heard
-                                                                 // percentages
-            outputHolder += "likes" + "\n"; // likes header
-            outputHolder += combo.likePercentToString() + "\n"; // likes
-                                                                // percentages
-            outputHolder += "\n";
-        }
-        return outputHolder;
+    /**
+     * Getter method for the surveyData
+     * 
+     * @return surveyData information
+     */
+    public static String[][] getSurveyData2D() {
+        return surveyData;
+    }
+
+
+    /**
+     * Getter method of the songList
+     * 
+     * @return songList information
+     */
+    public static String[][] getSongList2D() {
+        return songList;
     }
 }
