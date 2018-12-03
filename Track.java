@@ -4,7 +4,7 @@ package prj5;
 /**
  * A class that represents each track presented in the survey.
  * 
- * @author Andrew Caldwell (candrew9)
+ * @author Andrew Caldwell candrew9, Brook Fey brofey, Cole Steigman coles14
  * @version 2018.11.25
  *
  */
@@ -77,6 +77,7 @@ public class Track {
     
     /**
      * Return a string of this song
+     * @return String toString
      */
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -97,3 +98,4 @@ public class Track {
     }
 
 }
+
