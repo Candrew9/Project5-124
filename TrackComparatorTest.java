@@ -15,7 +15,7 @@ public class TrackComparatorTest extends TestCase {
 
     // fields
 
-    private DLList<Track> trackList;
+    
     private TrackComparator comparator;
     private Track t;
     private Track track;
@@ -26,7 +26,7 @@ public class TrackComparatorTest extends TestCase {
      * Sets up the common test scenario
      */
     public void setUp() {
-        trackList = new DLList<Track>();
+        DLList<Track> trackList = new DLList<Track>();
         
         track = new Track("tracks", "roads", "1999", "pop");
         t = new Track("name", "artist", "2008", "genre");
@@ -98,5 +98,3 @@ public class TrackComparatorTest extends TestCase {
         
         assertEquals(control.toString(), comparator.sortByYear().toString());
     }
-
-}
