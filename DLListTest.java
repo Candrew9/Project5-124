@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import student.TestCase;
 /**
- * @author Cole Steigman, Brooke Fey, Andrew Caldwell
+ * @author Andrew Caldwell candrew9, Brook Fey brofey, Cole Steigman coles14
  * @version 11/11/2018
  * Used lab10 for base
  */
