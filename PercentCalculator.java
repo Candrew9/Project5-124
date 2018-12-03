@@ -9,7 +9,7 @@ import java.util.Comparator;
  * Note - might want to create 6 array fields instead of 2, would need to double
  * up methods as well
  * 
- * @author Andrew Caldwell (candrew9)
+ * @author Andrew Caldwell candrew9, Brook Fey brofey, Cole Steigman coles14
  * @version 2018.11.26
  *
  */
@@ -22,12 +22,14 @@ public class PercentCalculator implements Comparator<String> {
     private int[][] likedRegion;
     private int[][] heardHobby;
     private int[][] likedHobby;
-    private int type;
 
 
     /**
      * Creates a new percentCalculator, using integer values to determine hobby,
      * major or region percentages
+     * 
+     * @param category
+     *            0 for major, 1 for region, other Number for hobby
      */
     public PercentCalculator(int category) {
         heardMajor = new int[4][2];
@@ -36,7 +38,6 @@ public class PercentCalculator implements Comparator<String> {
         likedRegion = new int[4][2];
         heardHobby = new int[4][2];
         likedHobby = new int[4][2];
-        type = category;
     }
 
 
@@ -281,15 +282,22 @@ public class PercentCalculator implements Comparator<String> {
      * 
      * @param category
      *            the type of survey results changed (i.e. major, region, hobby)
+     * @param survey
+     *            the survey result being targeted for the category
      * @param heards
      *            the heards found from the results of this survey
      * @param likes
      *            the likes found from the survey results
      */
-    public void calculate(int category, String survey, String heards, String likes) {
+    public void calculate(
+        int category,
+        String survey,
+        String heards,
+        String likes) {
         heardSong(category, survey, heards);
         likedSong(category, survey, likes);
     }
+
 
     /**
      * Returns an integer value based on two Strings reading the same
@@ -304,7 +312,8 @@ public class PercentCalculator implements Comparator<String> {
     public int compare(String str1, String str2) {
         return (str1.compareTo(str2));
     }
-    
+
+
     /**
      * Creates a integer array containing the percentages of the likes by Hobby,
      * Region or class
@@ -322,28 +331,30 @@ public class PercentCalculator implements Comparator<String> {
         if (category == 0) {
 
             for (int i = 0; i < percent.length; i++) {
-                percent[i] = (heardMajor[i][0] / (heardMajor[i][0]
-                    + heardMajor[i][1]));
+                percent[i] = calculatePercentageWithInts(heardMajor[i][0],
+                    heardMajor[i][1]);
             }
         }
         else if (category == 1) {
 
             for (int i = 0; i < percent.length; i++) {
-                percent[i] = (heardRegion[i][0] / (heardRegion[i][0]
-                    + heardRegion[i][1]));
+                percent[i] = calculatePercentageWithInts(heardRegion[i][0],
+                    heardRegion[i][1]);
             }
         }
         else {
 
             for (int i = 0; i < percent.length; i++) {
-                percent[i] = (heardHobby[i][0] / (heardHobby[i][0]
-                    + heardHobby[i][1]));
+                percent[i] = calculatePercentageWithInts(heardHobby[i][0],
+                    heardHobby[i][1]);
             }
         }
-        
+
         return percent;
 
     }
+
+
     /**
      * Creates a integer array containing the percentages of the likes by Hobby,
      * Region or class
@@ -361,26 +372,106 @@ public class PercentCalculator implements Comparator<String> {
         if (category == 0) {
 
             for (int i = 0; i < percent.length; i++) {
-                percent[i] = (likedMajor[i][0] / (likedMajor[i][0]
-                    + likedMajor[i][1]));
+                percent[i] = calculatePercentageWithInts(likedMajor[i][0],
+                    likedMajor[i][1]);
             }
         }
         else if (category == 1) {
 
             for (int i = 0; i < percent.length; i++) {
-                percent[i] = (likedRegion[i][0] / (likedRegion[i][0]
-                    + likedRegion[i][1]));
+                percent[i] = calculatePercentageWithInts(likedRegion[i][0],
+                    likedRegion[i][1]);
             }
         }
         else {
 
             for (int i = 0; i < percent.length; i++) {
-                percent[i] = (likedHobby[i][0] / (likedHobby[i][0]
-                    + likedHobby[i][1]));
+                percent[i] = calculatePercentageWithInts(likedHobby[i][0],
+                    likedHobby[i][1]);
             }
         }
-        
+
         return percent;
 
+    }
+
+
+    /**
+     * Getter method for heardMajor
+     * 
+     * @return The yes and no counts for heardMajor
+     */
+    public int[][] getHeardMajor() {
+        return heardMajor;
+    }
+
+
+    /**
+     * Getter method for likedMajor
+     * 
+     * @return The yes and no counts for likedMajor
+     */
+    public int[][] getLikedMajor() {
+        return likedMajor;
+    }
+
+
+    /**
+     * Getter method for heardRegion
+     * 
+     * @return The yes and no counts for heardRegion
+     */
+    public int[][] getHeardRegion() {
+        return heardRegion;
+    }
+
+
+    /**
+     * Getter method for likedRegion
+     * 
+     * @return The yes and no counts for likedRegion
+     */
+    public int[][] getLikedRegion() {
+        return likedRegion;
+    }
+
+
+    /**
+     * Getter method for heardHobby
+     * 
+     * @return The yes and no counts for heardHobby
+     */
+    public int[][] getHeardHobby() {
+        return heardHobby;
+    }
+
+
+    /**
+     * Getter method for likedHobby
+     * 
+     * @return The yes and no counts for likedHobby
+     */
+    public int[][] getLikedHobby() {
+        return likedHobby;
+    }
+
+
+    /**
+     * Calculates the percentage of positive answers given ints
+     * 
+     * @param yes
+     *            Number of positive answers
+     * @param no
+     *            Number of negative answers
+     * @return The percentage of positive answers
+     */
+    public int calculatePercentageWithInts(int yes, int no) {
+        if (yes + no == 0) {
+            return 0;
+        }
+        double numerator = Double.valueOf(yes);
+        double denominator = Double.valueOf(no) + numerator;
+        double fraction = numerator / denominator * 100;
+        return (int)fraction;
     }
 }
