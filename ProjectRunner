@@ -3,7 +3,7 @@ import prj5.GUIDisplayWindow;
 
 /**
  * runs the project
- * @author Cole Steigman coles14
+ * @author Andrew Caldwell candrew9, Brook Fey brofey, Cole Steigman coles14
  * @version 9.17.2018
  */
 public class ProjectRunner {
