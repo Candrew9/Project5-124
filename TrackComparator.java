@@ -12,8 +12,8 @@ package prj5;
 public class TrackComparator {
 
     // fields
-    DLList<Track> tracks;
-    Track[] array;
+    
+    private Track[] array;
 
 
     /**
@@ -23,6 +23,7 @@ public class TrackComparator {
      *            a DLList containing tracks and their data
      */
     public TrackComparator(DLList<Track> list) {
+        DLList<Track> tracks = new DLList<Track>();
         tracks = list;
         array = new Track[tracks.size()];
         for (int i = 0; i < tracks.size(); i++) {
