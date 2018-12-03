@@ -1,15 +1,15 @@
-package doublylinkedlist;
+package prj5;
 
 import java.util.Iterator;
-
 import java.util.NoSuchElementException;
 
 /**
  * Creates a doubly linked list
- * @author Cole Steigman, Brooke Fey, Andrew Caldwell
+ * 
+ * @author Andrew Caldwell candrew9, Brook Fey brofey, Cole Steigman coles14
  * @version 11/11/2018
  * @param <E>
- * Used Lab 10 as base design
+ *            Used Lab 10 as base design
  */
 public class DLList<E> {
 
@@ -18,7 +18,7 @@ public class DLList<E> {
      * @author Cole Steigman, Brooke Fey, Andrew Caldwell
      * @version 11/11/2018
      */
-    private static class Node<E> {
+    static class Node<E> {
         private Node<E> next;
         private Node<E> previous;
         private E data;
@@ -233,9 +233,10 @@ public class DLList<E> {
      * gets the node at that index
      * 
      * @param index
+     *            the node at said index to be found
      * @return node at index
      */
-    private Node<E> getNodeAtIndex(int index) {
+    Node<E> getNodeAtIndex(int index) {
         if (index < 0 || size() <= index) {
             throw new IndexOutOfBoundsException("No element exists at "
                 + index);
@@ -332,98 +333,6 @@ public class DLList<E> {
         builder.append("}");
         return builder.toString();
     }
-    
-    public static void orderArray(int insert, int[] values, int begin, int end)
-    {
-        int i = end;
-        while ((i >= begin) && (insert < values[i]))
-        {
-            values[i+1] = values[i];
-            i--;
-            values[i + 1] = insert;
-        }
-    }
-    
-    public void sortArray(int[] values)
-    {
-        for (int unsorted = 1; unsorted < values.length; unsorted++)
-        {
-            int firstUnsorted = values[unsorted];
-            orderArray(firstUnsorted, values, 0, unsorted - 1);
-            
-        }
-    }
-    
-    public  Node orderNode(Node firstNode, Node insert)
-    {
-        E item = (E)insert.getData();
-        Node currentNode = firstNode;
-        Node previousNode = null;
-        while ((currentNode != null) && (item.equals(currentNode.getData())))
-        {
-            previousNode = currentNode;
-            currentNode = currentNode.next();
-        }
-        if (previousNode != null)
-        {
-            previousNode.setNext(insert);
-            insert.setNext(currentNode);
-        }
-        else
-        {
-            insert.setNext(firstNode);
-            firstNode = insert;
-        }
-        return firstNode;
-    }
-    
-    public Node sortNode(Node firstNode)
-    {
-        if ((firstNode != null) && (firstNode.next() != null))
-        {
-            Node unsorted = firstNode.next();
-            firstNode.setNext(null);
-            while (unsorted != null)
-            {
-                Node insert = unsorted;
-                unsorted = unsorted.next();
-                firstNode = orderNode(firstNode, insert);
-            }
-        }
-        return firstNode;
-    }
-    
-    public int[][] getOdds(int[][] answers)
-    {
-        int[][] odds = new int[3][answers.length - 5];
-        int k = 0;
-        for (int i = 0; i < answers[i].length; i++)
-        {
-            for (int j = 5; j < answers[j].length; j++)
-            {
-                odds[i][k] = answers[i][j];
-                k++;
-                j++;
-            }
-        }
-        return odds;
-    }
-    
-    public int[][] getEvens(int[][] answers)
-    {
-        int[][] evens = new int[3][answers.length - 5];
-        int k = 0;
-        for (int i = 0; i < answers[i].length; i++)
-        {
-            for (int j = 6; j < answers[j].length; j++)
-            {
-                evens[i][k] = answers[i][j];
-                k++;
-                j++;
-            }
-        }
-        return evens;
-    }
 
 
     /**
@@ -518,4 +427,5 @@ public class DLList<E> {
         }
 
     }
+}
 
