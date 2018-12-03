@@ -1,10 +1,7 @@
-/**
- * 
- */
 package prj5;
 
 /**
- * @author Brooke Fey (brofey)
+ * @author Andrew Caldwell candrew9, Brook Fey brofey, Cole Steigman coles14
  * @version 2018.11.30
  */
 public class PercentCalculatorTest extends student.TestCase {
@@ -302,10 +299,10 @@ public class PercentCalculatorTest extends student.TestCase {
      */
     public void testCalculatePercentagesWithInts()
     {
-        assertEquals(0, calHobby.calculatePercentageWithInts(0,0));
-        assertEquals(33, calHobby.calculatePercentageWithInts(1,2));
-        assertEquals(66, calHobby.calculatePercentageWithInts(2,1));
-        assertEquals(75, calHobby.calculatePercentageWithInts(3,1));
-        assertEquals(44, calHobby.calculatePercentageWithInts(4,5));
+        assertEquals(0, calHobby.calculatePercentageWithInts(0, 0));
+        assertEquals(33, calHobby.calculatePercentageWithInts(1, 2));
+        assertEquals(66, calHobby.calculatePercentageWithInts(2, 1));
+        assertEquals(75, calHobby.calculatePercentageWithInts(3, 1));
+        assertEquals(44, calHobby.calculatePercentageWithInts(4, 5));
     }
 }
